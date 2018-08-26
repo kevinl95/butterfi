@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+    <script type="text/javascript" src="/js/jquery-1.11.0.min.js" ></script>
+    <style type="text/css">
+      html,body{width:100%;height:100%;padding:0;margin:0;overflow:auto;}
+      #img-box{width:320px;height:640px}
+      #img{width:100%;height:100%}
+    </style>
+  </head>
+
+  <body >
+    <div id="img-box">
+      <img id="img"/>
+      <!--<input type="button" value="test" onclick='test()'/>
+      <input type="text" id="width" value="320" />
+      <input type="text" id="height"  value="240" />-->
+    </div>
+    <script type="text/javascript">
+      function adjust(x,y,width,height){
+        $("#img-box").css("width",width+"px");
+	    $("#img-box").css("height",height+"px");
+        $("#img-box").css("margin-top",y+"px"); 
+        $("#img-box").css("margin-left",x+"px");
+      }
+      
+      function load(host,x,y,width,height){
+        var url = host+"/?action=stream";
+        $("#img").attr("src", url) ;
+        adjust(x,y,width,height);
+      }
+
+      function login(param){
+        $.ajax({
+		type: "POST",
+        cache :false,
+		url: "/cgi-bin/login_cgi",
+		data: param,
+		dataType: 'json',
+		success: function(result){
+		    if(result.success){
+			  logged=true;
+		    }else{
+			  logged=false;
+		    }
+		},
+		error: function(){
+		    
+		}
+	    });
+      }
+
+      var logged=false;
+       
+      var param=document.URL.split('?')[1];
+        
+      var params=param.split('&');
+      var host =params[0].split('=')[1];
+      var x = params[1].split('=')[1];
+      var y = params[2].split('=')[1];
+      var w = params[3].split('=')[1];
+      var h = params[4].split('=')[1];
+        
+      load(host,x,y,w,h);
+        
+    </script>
+  </body>
+</html>

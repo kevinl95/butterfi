@@ -1,0 +1,56 @@
+<%#
+ Copyright 2008 Steven Barth <steven@midlink.org>
+ Copyright 2008-2012 Jo-Philipp Wich <jow@openwrt.org>
+ Licensed to the public under the Apache License 2.0.
+-%>
+
+<%+header%>
+
+<head>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+figure {
+    display: inline-block;
+    margin: 20px; /* adjust as needed */
+}
+figure img {
+    vertical-align: top;
+}
+figure figcaption {
+    text-align: center;
+}
+</style>
+</head>
+
+<div class="container">
+ <h1>Welcome to ButterFi!</h1>
+ <div class="row">
+   <div class="column">
+     <figure><a href="http://192.168.8.1/cgi-bin/luci/butterfi/teacherfiles"><img src="/luci-static/resources/icons/class_files.png" alt="Classroom Files" height=150 width=150/><figcaption>Classroom Files</figcaption></a></figure>
+   </div>
+   <div class="column">
+     <figure><a href="http://192.168.8.1/cgi-bin/luci/butterfi/student_upload"><img src="/luci-static/resources/icons/upload.png" alt="Upload a File" height=150 width=150/><figcaption>Upload a File</figcaption></a></figure>
+   </div>
+   <div class="column">
+     <figure><a href="http://192.168.8.1/cgi-bin/luci/butterfi/chat"><img src="/luci-static/resources/icons/chat.png" alt="Chat" height=150 width=150/><figcaption>Chat</figcaption></a></figure>
+   </div>
+ </div>
+ <h3><a href="http://192.168.8.1/cgi-bin/luci/admin"> Teacher Login </a><h3>
+</div>
+<%+footer%>

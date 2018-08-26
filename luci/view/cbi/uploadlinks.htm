@@ -1,0 +1,44 @@
+<%+header%>
+<head>
+<title>Student Upload Links</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/qrcode.min.js"></script>
+</head>
+<body>
+<h1> Generate Student Assignment Upload QR Code </h1>
+<p> Enter a student's name, press the Enter key, and ButterFi will automatically generate their download QR code! Save this file or paste it into a document to print and distribute to your student.</p>
+<input id="text" type="text" style="width:80%" /><br />
+<div id="qrcode" style="width:250px; height:250px; margin-top:15px;"></div>
+
+<script type="text/javascript">
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+	width : 250,
+	height : 250
+});
+
+function makeCode () {
+	var elText = document.getElementById("text");
+
+	if (!elText.value) {
+		return;
+	}
+
+	qrcode.makeCode('192.168.8.1/cgi-bin/luci/butterfi/student_upload?student=' + elText.value);
+}
+
+makeCode();
+
+$("#text").
+	on("blur", function () {
+		makeCode();
+	}).
+	on("keydown", function (e) {
+		if (e.keyCode == 13) {
+			makeCode();
+		}
+	});
+</script>
+</body>
+<%+footer%>
